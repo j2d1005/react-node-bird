@@ -11,6 +11,7 @@
 
 # production
 /build
+/front/.next
 
 # misc
 .DS_Store
