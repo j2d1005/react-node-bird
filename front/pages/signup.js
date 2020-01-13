@@ -1,4 +1,5 @@
 import React, { useState, useCallback, memo } from 'react';
+import {useInput} from '../hooks'
 import { Form, Input, Checkbox, Button } from 'antd';
 // input 최적화 ,, 안해도된다.
 // const TextInput = memo( ({ name, value, onChange}) => {
@@ -8,14 +9,6 @@ import { Form, Input, Checkbox, Button } from 'antd';
 // });
 
 const Signup = () => {
-    // useInput hooks
-    const useInput = (initValue = null) => {
-        const [value, setValue] = useState(initValue);
-        const handler = useCallback( (e) => {
-            setValue(e.target.value);
-        },[]);
-        return [value, handler];
-    };
 
     const [id, onChangeId] = useInput('');
     const [nick, onChangeNick] = useInput('');

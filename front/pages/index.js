@@ -1,10 +1,31 @@
 import React from "react";  // 안써도된다 next에서 자동으로 해줌 그런데 hooks 쓸거면 어짜피 써야됨..
+import PostForm from "../components/PostForm";
+import PostCard from "../components/PostCard";
+
+const dummy = {
+    inLoggedIn: true,
+    imagePaths: [],
+    mainPosts: [{
+        User: {
+            id: 1,
+            nickname: '홍삼',
+        },
+        content: '첫 번째 게시글',
+        img: '/images/hongsam.png',
+    }],
+};
 
 const Home = () => {
     return (
-        <>
-            <div>Hello, Next!</div>
-        </>
+        <div>
+            {dummy.inLoggedIn && <PostForm />}
+
+            {dummy.mainPosts.map((c) => {
+                return(
+                    <PostCard key={c} post={c} />
+                );
+            })}
+        </div>
     );
 };
 
