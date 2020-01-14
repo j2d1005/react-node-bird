@@ -1,19 +1,15 @@
 import React from 'react';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
+import { Menu, Input,  Row, Col } from 'antd';
+import { useSelector } from 'react-redux';
 import LoginForm from './LoginForm';
 import UserProfile from "./UserProfile";
-import { Menu, Input,  Row, Col } from 'antd';
-
-const dummy = {
-    Nickname: '홍삼',
-    Post: [],
-    Followings: [],
-    Followers: [],
-    inLoggedIn: false,
-};
 
 const AppLayout = ({ children }) => {
+
+    const { isLoggedIn } = useSelector(state => state.user);
+
     return(
         <div>
             <Menu mode="horizontal">
@@ -25,7 +21,7 @@ const AppLayout = ({ children }) => {
             </Menu>
             <Row gutter={8}>
                 <Col xs={24} md={6} >
-                    {dummy.inLoggedIn
+                    {isLoggedIn
                         ?<UserProfile />
                         :<LoginForm />
                     }
@@ -33,7 +29,9 @@ const AppLayout = ({ children }) => {
                 <Col xs={24} md={12} >
                     {children}
                 </Col>
-                <Col xs={24} md={6} >세번째</Col>
+                <Col xs={24} md={6}>
+                    <Link href="https://github.com/j2d1005/react-node-bird" prefetch={false} ><a target="_blank">Made by HongSam <br/>Study</a></Link>
+                </Col>
             </Row>
         </div>
     );

@@ -1,11 +1,15 @@
 import React from 'react';
 import Head from 'next/head';
 import PropTypes from 'prop-types';
+import withRedux from 'next-redux-wrapper';
 import AppLayout from '../components/AppLayout';
+import { applyMiddleware, compose, createStore } from 'redux';
+import { Provider } from 'react-redux';
+import reducer from '../reducers';
 
-const NodeBird = ({ Component }) => { // next에서 넣어주는 Component 라는 프롭스이다. pages안에 있는 컴포넌트들을 넣어줌
+const NodeBird = ({ Component, store }) => { // next에서 넣어주는 Component 라는 프롭스이다. pages안에 있는 컴포넌트들을 넣어줌
     return(
-        <>
+        <Provider store={store}>
             <Head>
                 <title>NodeBird</title>
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/3.23.6/antd.css" />
@@ -13,12 +17,21 @@ const NodeBird = ({ Component }) => { // next에서 넣어주는 Component 라�
             <AppLayout>
                 <Component />
             </AppLayout>
-        </>
+        </Provider>
     );
 };
 
 NodeBird.propTypes = {
     Component: PropTypes.elementType,
+    store: PropTypes.object,
 };
 
-export default NodeBird;
+export default withRedux((initialState, options) => {
+    const middlewares = [];
+    const enhancer = compose(
+        applyMiddleware(...middlewares),
+        !options.isServer && typeof window.__REDUX_DEVTOOLS_EXTENSION__ !== 'undefined' ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f,
+    );
+    const store = createStore(reducer, initialState, enhancer);
+    return store;
+})(NodeBird);

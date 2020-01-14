@@ -1,26 +1,31 @@
 import React from "react";  // 안써도된다 next에서 자동으로 해줌 그런데 hooks 쓸거면 어짜피 써야됨..
 import PostForm from "../components/PostForm";
 import PostCard from "../components/PostCard";
+import { useSelector } from 'react-redux';
 
-const dummy = {
-    inLoggedIn: true,
-    imagePaths: [],
-    mainPosts: [{
-        User: {
-            id: 1,
-            nickname: '홍삼',
-        },
-        content: '첫 번째 게시글',
-        img: '/images/hongsam.png',
-    }],
-};
+// const dummy = {
+//     inLoggedIn: true,
+//     imagePaths: [],
+//     mainPosts: [{
+//         User: {
+//             id: 1,
+//             nickname: '홍삼',
+//         },
+//         content: '첫 번째 게시글',
+//         img: '/images/hongsam.png',
+//     }],
+// };
 
 const Home = () => {
+
+    const { isLoggedIn } = useSelector(state => state.user);
+    const { mainPosts } = useSelector(state => state.post);
+
     return (
         <div>
-            {dummy.inLoggedIn && <PostForm />}
+            {isLoggedIn && <PostForm />}
 
-            {dummy.mainPosts.map((c) => {
+            {mainPosts.map((c) => {
                 return(
                     <PostCard key={c} post={c} />
                 );

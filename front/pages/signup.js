@@ -1,6 +1,8 @@
 import React, { useState, useCallback, memo } from 'react';
 import {useInput} from '../hooks'
 import { Form, Input, Checkbox, Button } from 'antd';
+import { useDispatch } from 'react-redux';
+import { signUpAction } from '../reducers/user';
 // input 최적화 ,, 안해도된다.
 // const TextInput = memo( ({ name, value, onChange}) => {
 //     return (
@@ -17,6 +19,7 @@ const Signup = () => {
     const [term, setTerm] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
     const [termError, setTermError] = useState(false);
+    const dispatch = useDispatch();
 
 
     const onSubmit = useCallback( (e) => {
@@ -26,24 +29,23 @@ const Signup = () => {
         }if(!term){
             return setTermError(true);
         }
-        console.log({
+        dispatch(signUpAction({
             id,
-            nick,
             password,
-            passwordChk,
-            term
-        });
-    },[password, passwordChk, term ]);
+            nick,
+        }));
+    }, [password, passwordChk, term]);
 
     const onChangePasswordChk = useCallback( (e) => {
         setPasswordError(e.target.value !== password);
         setPasswordChk(e.target.value);
     },[password]);
+
     const onChangeTerm = useCallback( (e) => {
         setTermError(false);
         setTerm(e.target.checked);
         // setTerm(!term);
-    },[term]);
+    },[]);
 
 
     return(
