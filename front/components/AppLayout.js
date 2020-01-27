@@ -30,7 +30,7 @@ const AppLayout = ({ children }) => {
                     {children}
                 </Col>
                 <Col xs={24} md={6}>
-                    <Link href="https://github.com/j2d1005/react-node-bird" prefetch={false} ><a target="_blank">Made by HongSam <br/>Study</a></Link>
+                    <Link href="https://github.com/j2d1005/react-node-bird" ><a target="_blank">Made by HongSam <br/>Study</a></Link>
                 </Col>
             </Row>
         </div>
@@ -41,4 +41,3 @@ AppLayout.propTypes = {
     children: PropTypes.node,
 };
 export default AppLayout;
-//children = props ...?
