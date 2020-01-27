@@ -6,19 +6,21 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next starrt"
+    "start": "next start"
   },
   "author": "HONG",
   "license": "MIT",
   "dependencies": {
     "antd": "^3.25.2",
+    "axios": "^0.19.2",
     "next": "^9.1.4",
     "next-redux-wrapper": "^4.0.1",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-redux": "^7.1.3",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "redux-saga": "^1.1.3"
   },
   "devDependencies": {
     "eslint": "^6.7.1",
